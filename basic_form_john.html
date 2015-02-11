@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>John's Basic Form</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
+	
+
+	
+	<script>
+		window.onload = function()
+		{
+			document.getElementById("contact-form").onsubmit = 
+			validateForm;
+		}
+		
+		function validateForm()
+		{
+			var validName = validateTxtField("name", "error-name");
+			var validPhone = validateTxtField("phone", "error-phone");
+			var validEmail = validateTxtField("email", "error-email");
+			var validTerms = validateCheckbox("terms", "error-terms");
+			
+			return validName && validPhone && validTerms && validEmail;
+		}
+		
+		function validateTxtField(fieldId, errorId)
+		{
+			var fieldTxt = document.getElementById(fieldId).value;
+			var errorSpan = document.getElementById(errorId);
+			
+			if(fieldTxt == "")
+			{
+				errorSpan.className = "error";
+				return false;
+			}
+			else
+			{
+				errorSpan.className = "hidden";
+				return true;
+			}
+		}
+		
+		function validateCheckbox(fieldId, errorId)
+		{
+			var checkbox = document.getElementById(fieldId);
+			var errorSpan = document.getElementById(errorId);
+		
+			if(!checkbox.checked) //didn't check the checkbox. ! = not
+			{
+				errorSpan.className = "error"
+				return false;
+			}
+			else
+			{
+				errorSpan.className = "hidden";
+				return true;
+			}
+		}
+	</script>
+</head>
+
+<body>
+
+<div id="wrapper">
+<header>
+<h1>basic contact form</h1>
+</header>
+
+<div id="main-content">
+<div id="explanation">
+<h3>Explanation</h3>
+<p>
+This is a form which will ask for input, using JavaScript to validate the form and to alert User when required input is missing. Upon successful completion of this form, clicking the "Submit" button will cause a <span class="inlineBoldItal">Success!</span> page to load.
+</p>
+</div>
+<form id="contact-form" action="submit.html">
+	<p>
+		<label>Name:<br>
+			<input type="text" name="name" id="name" placeholder="Required" />
+		</label>
+		<span id="error-name" class="hidden">* You can’t leave this field blank</span>
+	</p>
+	
+	<p>
+		<label>Email:<br>
+			<input type="email" name="email" id="email" placeholder="Required" />
+		</label>
+		<span id="error-email" class="hidden">* You can’t leave this field blank</span>
+	</p>
+	
+	<p>
+		<label>Phone:<br>
+			<input type="text" name="phone" id="phone" placeholder="Required"/>
+		</label>
+		<span id="error-phone" class="hidden">* You can’t leave this field blank</span>
+	</p>
+	
+	<p>
+		<label>Message:<br>
+
+		<textarea id="message" name="message" COLS=50 ROWS=15 placeholder="Please type your message here" ></textarea>
+		</label>
+	</p>
+	
+	<p>
+		<label>I am <span class="inlineItal">not</span> a spambot!
+			<input type="checkbox" id="terms" name="terms" />
+		</label>
+		<span id="error-terms" class="hidden">* you must check this box to proceed</span>
+	</p>
+	
+	<button name="submit" id="submit">Submit</button>
+</form>
+
+</div>  <!-- END main-content -->
+
+<footer>
+<p>
+form by john a. johnson
+<p>
+</footer>
+
+</div> <!-- END WRAPPER -->
+
+</body>
+</html>
